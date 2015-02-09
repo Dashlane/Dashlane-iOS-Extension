@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DashlaneExtensionConstants.h"
 
-typedef void (^RequestCompletionBlock)(NSDictionary *, NSError *);
+typedef void (^RequestCompletionBlock)(NSDictionary *response, NSError *error);
 
 @interface DashlaneExtensionRequestHelper : NSObject
 
@@ -43,6 +43,9 @@ typedef void (^RequestCompletionBlock)(NSDictionary *, NSError *);
 - (void)requestPhoneNumberWithCompletionBlock:(RequestCompletionBlock)completionBlock;
 - (void)requestPassportInfoWithCompletionBlock:(RequestCompletionBlock)completionBlock;
 
+#pragma mark - Common store data requests
+- (void)requestStoreLoginAndPassword:(NSDictionary *)credentialDetail withCompletionBlock:(RequestCompletionBlock)completionBlock;
+
 #pragma mark - Custom requests
 
 /**
@@ -53,6 +56,8 @@ typedef void (^RequestCompletionBlock)(NSDictionary *, NSError *);
  */
 - (void)startNewRequest;
 
+- (void)startNewRequestFromViewController:(UIViewController *)viewController;
+
 /**
  @brief Adding a request to the current batch of requests
  
@@ -62,6 +67,16 @@ typedef void (^RequestCompletionBlock)(NSDictionary *, NSError *);
  @param An string that is used to filter the requested data. You can pass nil if you don't need it.
  */
 - (void)addRequest:(NSString *)requestIdentifier matchingString:(NSString *)stringToMatch;
+
+/**
+ @brief Adding a store request to the current batch of requests
+ 
+ 
+ @param The identifier (i.e type) of the store request. Refer to DashlaneExtensionConstants.h to find supported identifiers. This argument cannot be nil.
+ @param The data details dictionnary. Refer to DashlaneExtensionConstants.h for keys to populate this dictionnary depending the type of data you want to store.
+ */
+
+- (void)addStoreDataRequest:(NSString *)storeDataRequestIdentifier withDataDetails:(NSDictionary *)dataDetails;
 
 /**
  @brief Send the current batch of requests to Dashlane extension.

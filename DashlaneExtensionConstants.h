@@ -14,7 +14,7 @@
 /**
  @brief Identifiers for supported request types.
  
- A request identifier is required for each type of data to be requested. When creating an NSItemProvide ([NSItemProvide initWithItem:typeIdentifier:]) to initiate a request,
+ A request identifier is required for each type of data to be requested. When creating an NSItemProvider ([NSItemProvider initWithItem:typeIdentifier:]) to initiate a request,
  the typeIdentifier argument will be one of the request identifiers below.
  
  */
@@ -25,6 +25,39 @@ extern NSString * const DASHLANE_EXTENSION_REQUEST_CREDIT_CARD;
 extern NSString * const DASHLANE_EXTENSION_REQUEST_IDENTITY_INFO;//first name, date of birth etc.
 extern NSString * const DASHLANE_EXTENSION_REQUEST_PHONE_NUMBER;
 extern NSString * const DASHLANE_EXTENSION_REQUEST_PASSPORT_INFO;
+
+
+/**
+ @brief Identifiers for supported saving data request types
+ 
+ The following request identifiers can be used to ask Dashlane to save data. Please refer to the "Data details keys for store data requests" section for the data details keys
+ you need to provide.
+
+ */
+
+extern NSString * const DASHLANE_EXTENSION_REQUEST_STORE_LOGIN;
+
+
+
+
+/**
+ @brief Sign-up/Account creation request
+ The following keys are related to sign-up/account creation request. 
+ The request identifier is "DASHLANE_EXTENSION_REQUEST_SIGNUP".
+ For each sign-up request, a dictionary of two items are required: 
+ 1- DASHLANE_EXTENSION_SIGNUP_SERVICE_URL which is a string representing the service name of even better, its URL
+ 2- DASHLANE_EXTENSION_SIGNUP_REQUESTED_DATA which is an array of the data needed for your account creation form
+ */
+extern NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP;
+extern NSString * const DASHLANE_EXTENSION_SIGNUP_REQUESTED_DATA;
+extern NSString * const DASHLANE_EXTENSION_SIGNUP_SERVICE_URL;
+//Keys for data needed
+extern NSString * const DASHLANE_EXTENSION_SIGNUP_REQUEST_CREDENTIALS_KEY;//username, email and password
+extern NSString * const DASHLANE_EXTENSION_SIGNUP_REQUEST_IDENTITY_INFO_KEY;//first name, last name, middle name, birth date, birth place
+extern NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP_ADDRESS_KEY;
+extern NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP_PHONE_NUMBER_KEY;
+
+
 
 
 #pragma mark - Request userInfo Keys
@@ -63,10 +96,11 @@ extern NSString * const DASHLANE_EXTENSION_REQUEST_STRING_TO_MATCH_KEY;
 
 #pragma mark - Login and Password
 /**
- For Login and Password request, if the parameter "DASHLANE_EXTENSION_REQUEST_STRING_TO_MATCH_KEY" is nil. Dashlane Extension
+ For Login and Password requests, if the parameter "DASHLANE_EXTENSION_REQUEST_STRING_TO_MATCH_KEY" is nil. Dashlane Extension
  will present items that are matching the app name (i.e. DASHLANE_EXTENSION_REQUEST_APP_NAME_KEY)
  */
 extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_LOGIN_KEY;
+extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_EMAIL_KEY;
 extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY;
 
 
@@ -111,6 +145,23 @@ extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_FULL_NAME_KEY;
 extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_SEX_KEY;
 extern NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_BIRTH_DATE_KEY;//A string containing timestamp
 
+
+
+
+#pragma mark - Data details keys for store data requests
+
+/**
+ @brief Keys of what the can the data details dictionary can contains
+ 
+ For each store data request. A dictonary representing the data details is needed. The keys that the dictionary can contain depends on the
+ the type the data item to store.
+ 
+ */
+
+#pragma mark - Login and Password
+extern NSString * const DASHLANE_EXTENSION_STORE_REQUEST_LOGIN_KEY;
+extern NSString * const DASHLANE_EXTENSION_STORE_REQUEST_PASSWORD_KEY;
+extern NSString * const DASHLANE_EXTENSION_STORE_REQUEST_SERVICE_NAME_OR_URL_KEY;
 
 
 

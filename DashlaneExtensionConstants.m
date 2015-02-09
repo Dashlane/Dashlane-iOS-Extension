@@ -15,6 +15,12 @@ NSString * const DASHLANE_EXTENSION_REQUEST_IDENTITY_INFO = @"com.dashlane.exten
 NSString * const DASHLANE_EXTENSION_REQUEST_PHONE_NUMBER  = @"com.dashlane.extension.request-phone";
 NSString * const DASHLANE_EXTENSION_REQUEST_PASSPORT_INFO = @"com.dashlane.extension.request-passport";
 
+NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP        = @"com.dashlane.extension.request-signup";
+NSString * const DASHLANE_EXTENSION_SIGNUP_REQUESTED_DATA = @"dashlaneExtensionSignupRequestedData";
+NSString * const DASHLANE_EXTENSION_SIGNUP_SERVICE_URL    = @"dashlaneExtensionSignupSetviceURL";
+
+NSString * const DASHLANE_EXTENSION_REQUEST_STORE_LOGIN   = @"com.dashlane.extension.request-storeLogin";
+
 
 NSString * const DASHLANE_EXTENSION_REQUEST_APP_NAME_KEY = @"dashlaneExtensionRequestAppName";
 
@@ -23,9 +29,12 @@ NSString * const DASHLANE_EXTENSION_REQUEST_STRING_TO_MATCH_KEY    = @"dashlaneE
 
 
 #pragma mark - Login and Password
-NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_LOGIN_KEY    = @"dashlaneExtensionRequestReplyLogin";
-NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY = @"dashlaneExtensionRequestReplyPassword";
-
+NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_LOGIN_KEY               = @"dashlaneExtensionRequestReplyLogin";
+NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_EMAIL_KEY               = @"dashlaneExtensionRequestReplyLEmail";
+NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY            = @"dashlaneExtensionRequestReplyPassword";
+NSString * const DASHLANE_EXTENSION_STORE_REQUEST_LOGIN_KEY               = @"dashlaneExtensionStoreRequestLogin";
+NSString * const DASHLANE_EXTENSION_STORE_REQUEST_PASSWORD_KEY            = @"dashlaneExtensionStoreRequestPassword";
+NSString * const DASHLANE_EXTENSION_STORE_REQUEST_SERVICE_NAME_OR_URL_KEY = @"dashlaneExtensionStoreRequestService";
 
 #pragma mark - Address
 NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_ADDRESS_STREET_KEY   = @"dashlaneExtensionRequestReplyAddressStreet";
@@ -67,6 +76,12 @@ NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_EXPIRE_DATE_KEY    = 
 NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_FULL_NAME_KEY      = @"dashlaneExtensionRequestReplyFullName";
 NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_SEX_KEY            = @"dashlaneExtensionRequestReplySex";
 NSString * const DASHLANE_EXTENSION_REQUEST_REPLY_PASSPORT_BIRTH_DATE_KEY     = @"dashlaneExtensionRequestReplyBirthDate";
+
+#pragma mark - Keys for data to request for Sign-ups
+NSString * const DASHLANE_EXTENSION_SIGNUP_REQUEST_CREDENTIALS_KEY   = @"dashlaneExtensionSignupRequestCredentials";
+NSString * const DASHLANE_EXTENSION_SIGNUP_REQUEST_IDENTITY_INFO_KEY = @"dashlaneExtensionSignupRequestIdentity";
+NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP_ADDRESS_KEY       = @"dashlaneExtensionSignupRequestAddress";
+NSString * const DASHLANE_EXTENSION_REQUEST_SIGNUP_PHONE_NUMBER_KEY  = @"dashlaneExtensionSignupRequestPhoneNumber";
 
 
 #pragma mark - Error codes

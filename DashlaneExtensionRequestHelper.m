@@ -10,8 +10,9 @@
 
 @interface DashlaneExtensionRequestHelper()
 
-@property (nonatomic, strong) NSString       *appName;
-@property (nonatomic, strong) NSMutableArray *currentRequestItems;
+@property (nonatomic, strong) NSString        *appName;
+@property (nonatomic, strong) NSMutableArray  *currentRequestItems;
+@property (nonatomic, weak)  UIViewController *presentingViewController;
 
 - (UIActivityViewController *)_activityViewControllerWithExtensionItem:(NSExtensionItem *)extensionItem;
 - (NSExtensionItem *)_extensionItemForCurrentItemProviders;
@@ -46,17 +47,39 @@
     return _currentRequestItems;
 }
 
+- (UIViewController *)presentingViewController
+{
+    if (!_presentingViewController){
+        return [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    }
+    
+    return _presentingViewController;
+}
+
 
 - (void)startNewRequest
 {
+    [self startNewRequestFromViewController:nil];
+}
+
+- (void)startNewRequestFromViewController:(UIViewController *)viewController
+{
     self.currentRequestItems = nil;
+    self.presentingViewController = viewController;
 }
 
 - (void)addRequest:(NSString *)requestIdentifier matchingString:(NSString *)stringToMatch
 {
     NSItemProvider *requestItemProvider = [[NSItemProvider alloc] initWithItem:stringToMatch ? @{DASHLANE_EXTENSION_REQUEST_STRING_TO_MATCH_KEY : stringToMatch} : @{} typeIdentifier:requestIdentifier];
     
-    [self.currentRequestItems addObject:requestItemProvider];;
+    [self.currentRequestItems addObject:requestItemProvider];
+}
+
+- (void)addStoreDataRequest:(NSString *)storeDataRequestIdentifier withDataDetails:(NSDictionary *)dataDetails
+{
+    NSItemProvider *requestItemProvider = [[NSItemProvider alloc] initWithItem:dataDetails typeIdentifier:storeDataRequestIdentifier];
+    
+    [self.currentRequestItems addObject:requestItemProvider];
 }
 
 - (void)sendRequestWithCompletionBlock:(RequestCompletionBlock)completionBlock
@@ -65,6 +88,8 @@
     
     if (extensionItem){
         UIActivityViewController *activityController = [self _activityViewControllerWithExtensionItem:extensionItem];
+        
+        activityController.popoverPresentationController.sourceView = self.presentingViewController.view;
         
         [activityController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
             if (!completed){
@@ -76,7 +101,7 @@
             }
         }];
         
-        [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:activityController animated:YES completion:nil];
+        [self.presentingViewController presentViewController:activityController animated:YES completion:nil];
     }
 }
 
@@ -133,6 +158,15 @@
     [self startNewRequest];
     
     [self addRequest:DASHLANE_EXTENSION_REQUEST_PASSPORT_INFO matchingString:nil];
+    [self sendRequestWithCompletionBlock:completionBlock];
+}
+
+- (void)requestStoreLoginAndPassword:(NSDictionary *)credentialDetail withCompletionBlock:(RequestCompletionBlock)completionBlock
+{
+    [self startNewRequest];
+    
+    [self addStoreDataRequest:DASHLANE_EXTENSION_REQUEST_STORE_LOGIN withDataDetails:credentialDetail];
+    
     [self sendRequestWithCompletionBlock:completionBlock];
 }
 
