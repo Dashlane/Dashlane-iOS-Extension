@@ -19,6 +19,7 @@
 		37B00EEB19B61FFD00FD37EA /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00EE319B61FFD00FD37EA /* CheckoutViewController.m */; };
 		37B00EEC19B61FFD00FD37EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00EE519B61FFD00FD37EA /* LoginViewController.m */; };
 		37B00EED19B61FFD00FD37EA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00EE719B61FFD00FD37EA /* ProfileViewController.m */; };
+		C9AB6D351A8A0E280072CA7D /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AB6D341A8A0E280072CA7D /* SignupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		37B00EE519B61FFD00FD37EA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37B00EE619B61FFD00FD37EA /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		37B00EE719B61FFD00FD37EA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		C9AB6D331A8A0E280072CA7D /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		C9AB6D341A8A0E280072CA7D /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 				37B00EE519B61FFD00FD37EA /* LoginViewController.m */,
 				37B00EE619B61FFD00FD37EA /* ProfileViewController.h */,
 				37B00EE719B61FFD00FD37EA /* ProfileViewController.m */,
+				C9AB6D331A8A0E280072CA7D /* SignupViewController.h */,
+				C9AB6D341A8A0E280072CA7D /* SignupViewController.m */,
 				37B00EC319B61EF100FD37EA /* Main.storyboard */,
 				37B00EC619B61EF100FD37EA /* Images.xcassets */,
 				37B00EB619B61EF100FD37EA /* Supporting Files */,
@@ -194,6 +199,7 @@
 				TargetAttributes = {
 					37B00EB219B61EF100FD37EA = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 4N836T6WLM;
 					};
 					37B00ECB19B61EF200FD37EA = {
 						CreatedOnToolsVersion = 6.0;
@@ -247,6 +253,7 @@
 				37B00EBC19B61EF100FD37EA /* AppDelegate.m in Sources */,
 				37B00EED19B61FFD00FD37EA /* ProfileViewController.m in Sources */,
 				376FF7E119FA5936006410AA /* DashlaneExtensionRequestHelper.m in Sources */,
+				C9AB6D351A8A0E280072CA7D /* SignupViewController.m in Sources */,
 				37B00EEB19B61FFD00FD37EA /* CheckoutViewController.m in Sources */,
 				37B00EB919B61EF100FD37EA /* main.m in Sources */,
 				37B00EEC19B61FFD00FD37EA /* LoginViewController.m in Sources */,
@@ -370,6 +377,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = "Travel+Style/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -384,6 +392,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = "Travel+Style/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

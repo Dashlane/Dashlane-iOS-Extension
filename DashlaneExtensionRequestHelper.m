@@ -57,6 +57,13 @@
 }
 
 
+#pragma mark - Public methods
+
++ (BOOL)isDashlaneAppExtensionAvailable
+{
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"dashlane-ext://"]];
+}
+
 - (void)startNewRequest
 {
     [self startNewRequestFromViewController:nil];
@@ -78,6 +85,13 @@
 - (void)addStoreDataRequest:(NSString *)storeDataRequestIdentifier withDataDetails:(NSDictionary *)dataDetails
 {
     NSItemProvider *requestItemProvider = [[NSItemProvider alloc] initWithItem:dataDetails typeIdentifier:storeDataRequestIdentifier];
+    
+    [self.currentRequestItems addObject:requestItemProvider];
+}
+
+- (void)addSignupRequestWithRequestDetails:(NSDictionary *)requestDetails {
+    
+    NSItemProvider *requestItemProvider = [[NSItemProvider alloc] initWithItem:requestDetails typeIdentifier:DASHLANE_EXTENSION_REQUEST_SIGNUP];
     
     [self.currentRequestItems addObject:requestItemProvider];
 }
@@ -104,6 +118,12 @@
         [self.presentingViewController presentViewController:activityController animated:YES completion:nil];
     }
 }
+
+- (NSExtensionItem *)extensionItemForCurrentRequests
+{
+    return [self _extensionItemForCurrentItemProviders];
+}
+
 
 - (void)requestLoginAndPasswordWithCompletionBlock:(RequestCompletionBlock)completionBlock
 {
@@ -170,12 +190,22 @@
     [self sendRequestWithCompletionBlock:completionBlock];
 }
 
+- (void)requestSignupWithDetail:(NSDictionary *)signupDetail withCompletionBlock:(RequestCompletionBlock)completionBlock {
+    
+    [self startNewRequest];
+    
+    [self addSignupRequestWithRequestDetails:signupDetail];
+    
+    [self sendRequestWithCompletionBlock:completionBlock];
+}
+
 
 #pragma mark - Utility methods
 
 - (UIActivityViewController *)_activityViewControllerWithExtensionItem:(NSExtensionItem *)extensionItem
 {
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[extensionItem] applicationActivities:nil];
+    
     
     activityController.excludedActivityTypes = @[ UIActivityTypeMail, UIActivityTypeAirDrop, UIActivityTypePostToFlickr, UIActivityTypeSaveToCameraRoll, UIActivityTypePostToTwitter, UIActivityTypeCopyToPasteboard, UIActivityTypeMessage, UIActivityTypePrint, UIActivityTypePostToFacebook, UIActivityTypeAddToReadingList, UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo ];
     
