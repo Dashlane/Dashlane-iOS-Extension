@@ -7,7 +7,9 @@ The Dashlane extension help to enhance the following areas of your app:
 2. **Checkout** – Your users can quickly make payments at checkout without having to type their details or even get out their credit card.
 3. **Sign-up** – Reducing friction at the sign-in stage is key to getting users into your app and exploring your features.
 
+
 <img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849">
+
 
 Getting started with setup
 ======================
