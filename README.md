@@ -4,7 +4,9 @@ Dashlane App Extension for iOS 8
 The Dashlane extension help to enhance the following areas of your app: 
 
 1. **Login** – Allow your users to quickly login to your app without the need to remember passwords, or type in details.
+
 2. **Checkout** – Your users can quickly make payments at checkout without having to type their details or even get out their credit card.
+
 3. **Sign-up** – Reducing friction at the sign-in stage is key to getting users into your app and exploring your features.
 
 
