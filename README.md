@@ -148,7 +148,7 @@ The DashlaneExtensionRequestHelper class provides a number of utility methods th
 - (void)requestSignupWithDetail:(NSDictionary *)signupDetail withCompletionBlock:(RequestCompletionBlock)completionBlock;
 ```
 
-DashlaneExtensionRequestHelper implementation details
+DashlaneExtensionRequestHelper
 ======================
 
 Any request to the Dashlane app extension using DashlaneExtensionRequestHelper follows the following:
