@@ -157,7 +157,7 @@ Every new request should start be calling the above method.
 **Add at least one request identifier**
 Dashlane app extension support 3 types of request:
 
-***Normal data request**
+* **Normal data request**
 
 ```objective-c
 - (void)addRequest:(NSString *)requestIdentifier matchingString:(NSString *)stringToMatch
@@ -168,7 +168,7 @@ Multiple data types can be requested using the same request by calling the top m
 
 Request identifiers are constants defined by Dashlane to recognize requested data types. To learn more, check DashlaneExtensionConstants.
 
-***Sign-up request**
+* **Sign-up request**
 
 ```objective-c
 - (void)addSignupRequestWithRequestDetails:(NSDictionary *)requestDetails;
@@ -176,7 +176,7 @@ Request identifiers are constants defined by Dashlane to recognize requested dat
 
 requestDetails is a dictionary that requires two keys, one with describes the data that is requested and another that identifies the URL of your service. To learn more check DashlaneExtensionConstants.
 
-***Store data requests**
+* **Store data requests**
 
 ```objective-c
 - (void)addStoreDataRequest:(NSString *)storeDataRequestIdentifier withDataDetails:(NSDictionary *)dataDetails;
