@@ -48,7 +48,7 @@ A request must include a non-empty app name parameter. It is the argument "appNa
 
 Without a non-empty app name, the extension will return an error.
 
-Implementation example 1: Logging in
+Example 1: Logging in
 ======================
 
 ```objective-c
@@ -63,7 +63,7 @@ NSDictionary *dict = [response objectForKey:DASHLANE_EXTENSION_REQUEST_LOGIN];
 }];
 ```
 
-Implementation example 2: Checkout
+Example 2: Checkout
 ======================
 
 ```objective-c
@@ -78,7 +78,7 @@ DashlaneExtensionRequestHelper *helper = [[DashlaneExtensionRequestHelper alloc]
 }];
 ```
 
-Implementation example 3: Sign-up
+Example 3: Sign-up
 ======================
 
 ```objective-c
@@ -103,7 +103,7 @@ NSDictionary *signupDetails = @{
 }];
 ```
 
-Implementation example 4: Saving data in Dashlane
+Example 4: Saving data in Dashlane
 ======================
 ```objective-c
 NSString *appName = @"TravelPlusStyle";
