@@ -11,7 +11,7 @@ The Dashlane extension help to enhance the following areas of your app:
 
 <br/>
 <p align="middle">
-<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849"> 
+<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="359" height="637"> 
 </p>
 
 Getting started with setup
