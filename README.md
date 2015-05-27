@@ -212,6 +212,7 @@ Structure of the returned items
 When the extension is dismissed, the (RequestCompletionBlock) completion block is called with a dictionary representing the answer from the Dashlane Extension:
 
 **Normal data request case**
+
 The dictionary contains, for each requested data type (i.e. requestIdentifier), a dictionary representation of a returned user data item. The keys for the dictionary representations of returned user data items can be found in [DashlaneExtensionConstants[(https://raw.githubusercontent.com/Dashlane/Dashlane-iOS-Extension/master/DashlaneExtensionConstants.h).
 
 Example of a returnedItems dictionary:
