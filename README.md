@@ -10,8 +10,9 @@ The Dashlane extension help to enhance the following areas of your app:
 3. **Sign-up** – Reducing friction at the sign-in stage is key to getting users into your app and exploring your features.
 
 <br/>
-<br/>
-<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849" align="middle"> 
+<p align="middle">
+<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849"> 
+</p>
 
 Getting started with setup
 ======================
