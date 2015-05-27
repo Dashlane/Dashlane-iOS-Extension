@@ -22,13 +22,13 @@ Supporting the Dashlane Extension is similar to general iOS 8 Extension support.
 
 What can be requested?
 ======================
-*Login and password
-*Address
-*Credit Card
-*Phone number
-*Passport info
-*Storing data
-*Account creation
+* Login and password
+* Address
+* Credit Card
+* Phone number
+* Passport info
+* Storing data
+* Account creation
 
 Detect the Dashlane app
 ======================
