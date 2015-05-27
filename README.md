@@ -2,34 +2,34 @@ Dashlane App Extension for iOS 8
 ======================
 <a href="https://d38muu3h4xeqr1.cloudfront.net/Dashlane-iOS8.mp4" target="_blank"><img src="https://www.dashlane.com/images/ios8-partners.png" width="640" height="360"></a>
 
-iOS 8 has an incredible feature called [App Extensions](https://developer.apple.com/library/ios/documentation/General/Conceptual/ExtensibilityPG/index.html). At Dashlane, we built a powerful and easy-to-implement App Extension for use in your apps. By using the Dashlane App Extension featured in the video above, you will enhance user experience and increase app engagement by eliminating manual data entry in three key areas:
+The Dashlane extension help to enhance the following areas of your app: 
 
-1. **Login** – How many times have you opened an app only to close it because you didn’t remember the password? Dashlane users manage over 50 million passwords, so you could reduce the number of lost interactions
-2. **Checkout** – Are your users putting items in their cart, but not checking out? Let Dashlane assist with checkout by autofilling user information. Dashlane has already facilitated over $1B in transactions.
-3. **Sign-up** – Need users to sign up to use your app? Dashlane has millions of users ready to use your app with the ease of Dashlane registration (coming soon).
-
-What data can be requested
-======================
-* Login and password
-* Address
-* Credit Card
-* Phone number
-* Passport info
+1. **Login** – Allow your users to quickly login to your app without the need to remember passwords, or type in details.
+2. **Checkout** – Your users can quickly make payments at checkout without having to type their details or even get out their credit card.
+3. **Sign-up** – Reducing friction at the sign-in stage is key to getting users into your app and exploring your features.
 
 Getting started with setup
 ======================
-Supporting the Dashlane Extension is similar to general iOS 8 Extension support. A UI element (e.g. a UIButton) needs to be added to trigger a UIActivityViewController instance which is going to present the iOS 8 extension selection UI components. Also, the Dashlane Extension uses NSItemProvider to build the request before passing it to the instance of UIActivityViewController via NSExtensionItem attachments.
+Supporting the Dashlane Extension is similar to general iOS 8 Extension support. A UI element (e.g. a UIButton) needs to be added to trigger a [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) instance which is going to present the iOS 8 extension selection UI components. Also, the Dashlane Extension uses [NSItemProvider](https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSItemProvider_Class/index.html) to build the request before passing it to the instance of [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) via [NSExtensionItem](https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSExtensionItem_Class/) attachments.
 
-DashlaneExtensionRequestHelper is a utility class that can be used to quickly support the Dashlane Extension. It takes care of creating the proper data structure of the request and presenting a UIActivityViewController view on the root view controller of the application key window.
+[DashlaneExtensionRequestHelper](https://github.com/Dashlane/Dashlane-iOS-Extension/blob/master/DashlaneExtensionRequestHelper.h) is a utility class that can be used to quickly support the Dashlane Extension. It takes care of creating the proper data structure of the request and presenting a [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) view on the root view controller of the application key window.
+
+What can be requested?
+======================
+*Login and password
+*Address
+*Credit Card
+*Phone number
+*Passport info
+*Storing data
+*Account creation
 
 Detect the Dashlane app
 ======================
-You may want to detect if your app user has Dashlane installed on their iOS device. Using the following code you'll be able to check if an extension ready version of Dashlane is installed:
+You may want to detect if your app user has Dashlane installed on their iOS device. Using the following method you'll be able to check if an extension ready version of Dashlane is installed:
 
 ```objective-c
-if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"dashlane-ext://"]) { 
-  // You can attempt to use the Dashlane Extension
-}
++ (BOOL)isDashlaneAppExtensionAvailable;
 ```
 
 App Name
@@ -42,29 +42,151 @@ A request must include a non-empty app name parameter. It is the argument "appNa
 
 Without a non-empty app name, the extension will return an error.
 
-Sending a request
+Implementation example 1: Logging in
 ======================
-A request includes the following steps:
 
-1. Starting a new request by calling
+```objective-c
+DashlaneExtensionRequestHelper *helper = [[DashlaneExtensionRequestHelper alloc] initWithAppName:@"TravelStyle"];
+[helper requestLoginAndPasswordWithCompletionBlock:^(NSDictionary *response, NSError *error) {
+NSDictionary *dict = [response objectForKey:DASHLANE_EXTENSION_REQUEST_LOGIN];
+  self.login = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_LOGIN_KEY];
+  self.password = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY];
+  if (self.login && self.password){
+    [self startLoading];
+  }
+}];
+```
+
+Implementation example 2: Checkout
+======================
+
+```objective-c
+DashlaneExtensionRequestHelper *helper = [[DashlaneExtensionRequestHelper alloc] initWithAppName:@"TravelPlusStyle"];
+[helper requestCreditCardWithCompletionBlock:^(NSDictionary *response, NSError *error) {
+  NSDictionary *dict = [response objectForKey:DASHLANE_EXTENSION_REQUEST_CREDIT_CARD];
+  self.number = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_CREDIT_CARD_NUMBER_KEY];
+  self.month = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_CREDIT_CARD_NUMBER_EXPIRATION_MONTH_KEY];
+  self.year = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_CREDIT_CARD_NUMBER_EXPIRATION_YEAR_KEY];
+  self.code = [dict objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_CREDIT_CARD_NUMBER_CCV_KEY];
+  [self performSelector:@selector(startLoading) withObject:nil afterDelay:0.5f];
+}];
+```
+
+Implementation example 3: Sign-up
+======================
+
+```objective-c
+DashlaneExtensionRequestHelper *helper = [[DashlaneExtensionRequestHelper alloc] initWithAppName:@"TravelPlusStyle"];
+NSArray *requestedData = @[
+                           DASHLANE_EXTENSION_SIGNUP_REQUEST_CREDENTIALS_KEY,
+                           DASHLANE_EXTENSION_SIGNUP_REQUEST_IDENTITY_INFO_KEY
+                          ];
+    
+NSDictionary *signupDetails = @{
+                                DASHLANE_EXTENSION_SIGNUP_REQUESTED_DATA:   requestedData,
+                                DASHLANE_EXTENSION_SIGNUP_SERVICE_URL:      @"http://travelplusstyle.com"
+                               };
+  
+[helper requestSignupWithDetail:signupDetails withCompletionBlock:^(NSDictionary *response, NSError *error) {
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    [self.firstName setText:[response objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_IDENTITY_FIRST_NAME_KEY]];
+    [self.lastName setText:[response objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_IDENTITY_LAST_NAME_KEY]];
+    [self.email setText:[response objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_EMAIL_KEY]];
+    [self.password setText:[response objectForKey:DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY]];
+  }];
+}];
+```
+
+Implementation example 4: Saving data in Dashlane
+======================
+```objective-c
+NSString *appName = @"TravelPlusStyle";
+NSString *serviceName = @"travelplusstyle.com";
+DashlaneExtensionRequestHelper *helper = [[DashlaneExtensionRequestHelper alloc] initWithAppName:appName];
+
+NSDictionary *credentialDetail = @{
+                                  DASHLANE_EXTENSION_STORE_REQUEST_LOGIN_KEY: self.loginField.text,
+                                  DASHLANE_EXTENSION_STORE_REQUEST_PASSWORD_KEY: self.passwordField.text,
+                                  DASHLANE_EXTENSION_STORE_REQUEST_SERVICE_NAME_OR_URL_KEY: serviceName
+                                  };
+        
+[helper requestStoreLoginAndPassword:credentialDetail withCompletionBlock:^(NSDictionary *dictionary, NSError *error) {
+  if (error != nil) {
+    UIAlertController *errorController = [UIAlertController alertControllerWithTitle:@"Failed to Save Credential" message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+                
+    [errorController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      [self startLoading];
+    }]];
+                
+    [self presentViewController:errorController animated:YES completion:nil];
+  }else {
+    [self startLoading];
+  }
+}];
+```
+
+Utility methods
+======================
+
+The DashlaneExtensionRequestHelper class provides a number of utility methods that can be used to to do the most common request from Dashlane:
+
+```objective-c
+- (void)requestLoginAndPasswordWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestLoginAndPasswordForAService:(NSString *)serviceName withCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestCreditCardWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestAddressWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestIdentityInfoWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestPhoneNumberWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestPassportInfoWithCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestStoreLoginAndPassword:(NSDictionary *)credentialDetail withCompletionBlock:(RequestCompletionBlock)completionBlock;
+- (void)requestSignupWithDetail:(NSDictionary *)signupDetail withCompletionBlock:(RequestCompletionBlock)completionBlock;
+```
+
+DashlaneExtensionRequestHelper implementation details
+======================
+
+Any request to the Dashlane app extension using DashlaneExtensionRequestHelper follows the following:
+
+**Starting a new request by calling**
 
 ```objective-c
 - (void)startNewRequest
 ```
+Every new request should start be calling the above method.
 
-2. Adding at least one request identifier by calling:
+**Add at least one request identifier**
+Dashlane app extension support 3 types of request:
+
+***Normal data request**
 
 ```objective-c
 - (void)addRequest:(NSString *)requestIdentifier matchingString:(NSString *)stringToMatch
 ```
-
-Request identifiers are constants defined by Dashlane to recognize requested data types. To learn more, check DashlaneExtensionConstants.
-
 stringToMatch is used to filter what the extension UI is going to present to the user. Pass nil if you don’t need it.
 
 Multiple data types can be requested using the same request by calling the top methods multiple times for each data type.
 
-3. Finally sending the request by calling
+Request identifiers are constants defined by Dashlane to recognize requested data types. To learn more, check DashlaneExtensionConstants.
+
+***Sign-up request**
+
+```objective-c
+- (void)addSignupRequestWithRequestDetails:(NSDictionary *)requestDetails;
+```
+
+requestDetails is a dictionary that requires two keys, one with describes the data that is requested and another that identifies the URL of your service. To learn more check DashlaneExtensionConstants.
+
+***Store data requests**
+
+```objective-c
+- (void)addStoreDataRequest:(NSString *)storeDataRequestIdentifier withDataDetails:(NSDictionary *)dataDetails;
+```
+
+Supported store request identifiers can be found in DashlaneExtensionConstants.
+
+dataDetails contains the data to be stored. Please refer to DashlaneExtensionConstants for the keys to be used (Section: Data details keys for store data requests) 
+
+**Finally send the request by calling**
 
 ```objective-c
 - (void)sendRequestWithCompletionBlock:(RequestCompletionBlock)completionBlock
@@ -80,7 +202,11 @@ typedef void (^RequestCompletionBlock)(NSDictionary *returnedItems, NSError *err
 
 Structure of the returned items
 ======================
-When the extension is dismissed, the (RequestCompletionBlock) completion block is called with a dictionary representing the answer from the Dashlane Extension. This dictionary contains, for each requested data type (i.e. requestIdentifier), a dictionary representation of a returned user data item. The keys for the dictionary representations of returned user data items can be found in [DashlaneExtensionConstants](https://raw.githubusercontent.com/Dashlane/Dashlane-iOS-Extension/master/DashlaneExtensionConstants.h).
+
+When the extension is dismissed, the (RequestCompletionBlock) completion block is called with a dictionary representing the answer from the Dashlane Extension:
+
+**Normal data request case**
+The dictionary contains, for each requested data type (i.e. requestIdentifier), a dictionary representation of a returned user data item. The keys for the dictionary representations of returned user data items can be found in [DashlaneExtensionConstants[(https://raw.githubusercontent.com/Dashlane/Dashlane-iOS-Extension/master/DashlaneExtensionConstants.h).
 
 Example of a returnedItems dictionary:
 
@@ -89,6 +215,25 @@ Example of a returnedItems dictionary:
 DASHLANE_EXTENSION_REQUEST_ADDRESS      : {DASHLANE_EXTENSION_REQUEST_REPLY_LOGIN_KEY: @“a login”, DASHLANE_EXTENSION_REQUEST_REPLY_PASSWORD_KEY : @“a password"},
 DASHLANE_EXTENSION_REQUEST_PHONE_NUMBER : {DASHLANE_EXTENSION_REQUEST_REPLY_PHONE_NUMBER_KEY: @“a phone number"}
 }
+```
+
+**Sign-up request case**
+
+The dictionary contains two keys, here is an example:
+
+```objective-c
+{
+DASHLANE_EXTENSION_SIGNUP_REQUESTED_DATA      : [DASHLANE_EXTENSION_SIGNUP_REQUEST_CREDENTIALS_KEY, DASHLANE_EXTENSION_SIGNUP_REQUEST_IDENTITY_INFO_KEY],
+DASHLANE_EXTENSION_SIGNUP_SERVICE_URL : @"https://yourwebsite.com"
+}
+```
+
+**Custom UIActivtyController**
+
+If you are using your own UIActivityController. DashlaneExtensionRequestHelper provides a method to returns the NSExtensionItem related to the current batch of requests. So after starting a new request, and adding requests identifiers. Instead of calling sending request directly, you can call:
+
+```objective-c
+- (NSExtensionItem *)extensionItemForCurrentRequests
 ```
 
 Webview forms
