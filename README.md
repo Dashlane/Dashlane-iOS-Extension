@@ -9,11 +9,11 @@ The Dashlane extension help to enhance the following areas of your app:
 
 3. **Sign-up** – Reducing friction at the sign-in stage is key to getting users into your app and exploring your features.
 
-
-
-<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849">
-
-
+<br/>
+<br/>
+<img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="478" height="849" align="middle"> 
+<br/>
+<br/>
 Getting started with setup
 ======================
 Supporting the Dashlane Extension is similar to general iOS 8 Extension support. A UI element (e.g. a UIButton) needs to be added to trigger a [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) instance which is going to present the iOS 8 extension selection UI components. Also, the Dashlane Extension uses [NSItemProvider](https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSItemProvider_Class/index.html) to build the request before passing it to the instance of [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) via [NSExtensionItem](https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSExtensionItem_Class/) attachments.
