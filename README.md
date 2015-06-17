@@ -1,7 +1,7 @@
 Dashlane App Extension for iOS 8
 ======================
 
-The Dashlane extension help to enhance the following areas of your app: 
+The Dashlane extension helps to enhance the following areas of your app: 
 
 1. **Login** – Allow your users to quickly login to your app without the need to remember passwords, or type in details.
 
@@ -158,10 +158,10 @@ Any request to the Dashlane app extension using DashlaneExtensionRequestHelper f
 ```objective-c
 - (void)startNewRequest
 ```
-Every new request should start be calling the above method.
+Every new request should start by calling the above method.
 
 **Add at least one request identifier**
-Dashlane app extension support 3 types of request:
+Dashlane app extension support 3 types of requests:
 
 * **Normal data request**
 
