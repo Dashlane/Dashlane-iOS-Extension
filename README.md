@@ -14,6 +14,10 @@ The Dashlane extension helps to enhance the following areas of your app:
 <img src="https://hipchat.dashlane.com/files/1/127/Xqr6B3R1nNXbifO/demo.gif" width="359" height="637"> 
 </p>
 
+Dashlane-Extension CocoaPod
+======================
+If you use CocoaPods to manage your third party libraries. You can add " pod 'Dashlane-Extension' " to your Podfile, run pod install from your project directory and you're ready to go.
+
 Getting started with setup
 ======================
 Supporting the Dashlane Extension is similar to general iOS 8 Extension support. A UI element (e.g. a UIButton) needs to be added to trigger a [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) instance which is going to present the iOS 8 extension selection UI components. Also, the Dashlane Extension uses [NSItemProvider](https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSItemProvider_Class/index.html) to build the request before passing it to the instance of [UIActivityViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIActivityViewController_Class/index.html) via [NSExtensionItem](https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSExtensionItem_Class/) attachments.
@@ -251,10 +255,6 @@ Filling webview forms starts by requesting the data from Dashlane. Then by runni
 NSString *javascript = [NSString stringWithFormat:@"!!function(e,t){var l=document.querySelectorAll('input[type=\"text\"],input[type=\"email\"]'),u=document.querySelectorAll('input[type=\"password\"]'),n=document.querySelectorAll('input[type=\"submit\"],button[type=\"submit\"]');return u&&u.length&&l&&l.length?(l[0].value=e,u[0].value=t,n.length&&n[0].click(),!0):!1}(\"%@\",\"%@\");", myLogin, myPassword];
 [webView stringByEvaluatingJavaScriptFromString:javascript];
 ```
-
-Dashlane-Extension CocoaPod
-======================
-If you use CocoaPods to manage your third party libraries. You can add " pod 'Dashlane-Extension' " to your Podfile, run pod install from your project directory and you're ready to go.
 
 Contact Us
 ======================
