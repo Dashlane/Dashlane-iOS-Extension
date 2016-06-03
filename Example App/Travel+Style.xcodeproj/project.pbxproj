@@ -20,6 +20,7 @@
 		37B00EEC19B61FFD00FD37EA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00EE519B61FFD00FD37EA /* LoginViewController.m */; };
 		37B00EED19B61FFD00FD37EA /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00EE719B61FFD00FD37EA /* ProfileViewController.m */; };
 		C9AB6D351A8A0E280072CA7D /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AB6D341A8A0E280072CA7D /* SignupViewController.m */; };
+		F622D0811D01997C006FD361 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F622D0801D01997C006FD361 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		37B00EE719B61FFD00FD37EA /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		C9AB6D331A8A0E280072CA7D /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		C9AB6D341A8A0E280072CA7D /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		F622D0801D01997C006FD361 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				37B00EC319B61EF100FD37EA /* Main.storyboard */,
 				37B00EC619B61EF100FD37EA /* Images.xcassets */,
 				37B00EB619B61EF100FD37EA /* Supporting Files */,
+				F622D0801D01997C006FD361 /* Launch Screen.storyboard */,
 			);
 			path = "Travel+Style";
 			sourceTree = "<group>";
@@ -199,7 +202,7 @@
 				TargetAttributes = {
 					37B00EB219B61EF100FD37EA = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 4N836T6WLM;
+						DevelopmentTeam = 3B3FT42G96;
 					};
 					37B00ECB19B61EF200FD37EA = {
 						CreatedOnToolsVersion = 6.0;
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F622D0811D01997C006FD361 /* Launch Screen.storyboard in Resources */,
 				37B00EC519B61EF100FD37EA /* Main.storyboard in Resources */,
 				37B00EC719B61EF100FD37EA /* Images.xcassets in Resources */,
 			);
@@ -377,11 +381,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Travel+Style/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -392,11 +398,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Travel+Style/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
